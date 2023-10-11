@@ -2,8 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Buffer } from 'buffer';
-import _sodium from 'libsodium-wrappers';
+//import { Buffer } from 'buffer';
+//import _sodium from 'libsodium-wrappers';
 import HttpRequest from './HttpRequest';
 
 //const Blake2b = require('blakejs').blake2b;
@@ -30,14 +30,16 @@ function App() {
 
   async function hashMessage(msg) {
 
-    await _sodium.ready;
+    return "";
 
-    const sodium = _sodium;
-    const digest = sodium.crypto_generichash(64, sodium.from_string(msg));
-    console.log(`digest is: ${digest}`);
-    const digest_base64 = sodium.to_base64(digest, _sodium.base64_variants.ORIGINAL);
-    console.log("digest64: " + digest_base64);
-    return digest_base64;
+    // await _sodium.ready;
+
+    // const sodium = _sodium;
+    // const digest = sodium.crypto_generichash(64, sodium.from_string(msg));
+    // console.log(`digest is: ${digest}`);
+    // const digest_base64 = sodium.to_base64(digest, _sodium.base64_variants.ORIGINAL);
+    // console.log("digest64: " + digest_base64);
+    // return digest_base64;
     // const hash = crypto.createHash('sha512'); // Use SHA-512 for a 64-byte hash
     // hash.update(msg);
     // const stringHash = hash.digest('base64');
