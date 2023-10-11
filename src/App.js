@@ -78,6 +78,38 @@ function App() {
     return encodeBase64(signature);
   }
 
+  var requestParameters = {
+    "context": {
+      "domain": "nic2004:52110",
+      "country": "IND",
+      "city": "*",
+      "action": "search",
+      "core_version": "1.1.0",
+      "bap_id": "gamatics.in",
+      "bap_uri": "https://gamatics.in/api/",
+      "transaction_id": "123lknh32",
+      "message_id": "89s9fosajkjkd",
+      "timestamp": "2023-08-19T11:00:13.950Z",
+      "ttl": "P1M"
+    },
+    "message": {
+          "intent" : {
+              "provider": {
+                  "descriptor" : {
+                      "name" : "Naveen Stores"
+                  }
+              },
+              "fulfillment": {
+                  "end" : {
+                      "location" : {
+                          "gps" : "12.4535445,77.9283792"
+                      }
+                  }
+              }
+          }
+      }
+  };
+
   async function createAuthorizationHeader(timestamp, created, expires) {
     // var requestParameters = {
     //   "context": {
@@ -111,37 +143,7 @@ function App() {
     //   }
     // };
 
-    var requestParameters = {
-      "context": {
-        "domain": "nic2004:52110",
-        "country": "IND",
-        "city": "*",
-        "action": "search",
-        "core_version": "1.1.0",
-        "bap_id": "gamatics.in",
-        "bap_uri": "https://gamatics.in/api/",
-        "transaction_id": "123lknh32",
-        "message_id": "89s9fosajkjkd",
-        "timestamp": "2023-08-19T11:00:13.950Z",
-        "ttl": "P1M"
-      },
-      "message": {
-            "intent" : {
-                "provider": {
-                    "descriptor" : {
-                        "name" : "Naveen Stores"
-                    }
-                },
-                "fulfillment": {
-                    "end" : {
-                        "location" : {
-                            "gps" : "12.4535445,77.9283792"
-                        }
-                    }
-                }
-            }
-        }
-    };
+    
     const digestBase64 = await hashMessage(requestParameters);
     console.log(digestBase64);
     const signingKey = createSigningString("/y4QC7IDQaImfnDJ70ldPLN5011JD22wF5TOKeGBoFrloRi64jOQdHRmIq7hCQ6StUCzN5SgYcwCrA8g+zZ1sw==", created, expires);
@@ -177,7 +179,7 @@ function App() {
     };
 
     // Make a POST request
-    axios.post(apiUrl, postData,{headers: customHeaders,},)
+    axios.post(apiUrl, requestParameters,{headers: customHeaders,},)
       .then(response => {
         console.log('Response data:', response.data);
       })
